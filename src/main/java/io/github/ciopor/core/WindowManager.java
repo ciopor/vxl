@@ -1,4 +1,4 @@
-package io.github.ciopor;
+package io.github.ciopor.core;
 
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
