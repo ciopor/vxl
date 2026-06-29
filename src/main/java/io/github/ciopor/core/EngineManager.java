@@ -5,7 +5,6 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 
 public class EngineManager {
-    public static final long NANOSECOND = 1_000_000_000L;
     public static double dt = 0.0f;
     private static int fps;
     private boolean isRunning;
