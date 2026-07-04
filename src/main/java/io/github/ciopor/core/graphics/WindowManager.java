@@ -1,6 +1,5 @@
-package io.github.ciopor.core;
+package io.github.ciopor.core.graphics;
 
-import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -9,21 +8,16 @@ import org.lwjgl.opengl.GL46;
 import org.lwjgl.system.MemoryUtil;
 
 public class WindowManager {
-    public static final float FOV = (float) Math.toRadians(85);
-    public static final float Z_NEAR = 0.0001f;
-    public static final float Z_FAR = 256f;
     private String title;
     private int windowWidth, windowHeight;
     private long window;
     private boolean resize, vSync;
-    private Matrix4f projectionMatrix;
 
     public WindowManager(String title, int windowWidth, int windowHeight, boolean vSync) {
         this.windowHeight = windowHeight;
         this.windowWidth = windowWidth;
         this.title = title;
         this.vSync = vSync;
-        projectionMatrix = new Matrix4f();
     }
 
     public void init() {
@@ -79,7 +73,7 @@ public class WindowManager {
         GLFW.glfwMakeContextCurrent(window);
 
         // Set vSync on if the user wants to
-        if (isVSync()) GLFW.glfwSwapInterval(1);
+        if (getVSync()) GLFW.glfwSwapInterval(1);
 
         GLFW.glfwShowWindow(window);
 
@@ -91,14 +85,14 @@ public class WindowManager {
         GL46.glCullFace(GL46.GL_BACK);
     }
 
-    public boolean isResize() {
+    public boolean getResize() {
         return resize;
     }
     public void setResize(boolean resize) {
         this.resize = resize;
     }
 
-    public boolean isVSync() {
+    public boolean getVSync() {
         return vSync;
     }
     public void setVSync(boolean vSync) {
@@ -126,7 +120,7 @@ public class WindowManager {
         return GLFW.glfwGetKey(window, keycode) == GLFW.GLFW_PRESS;
     }
 
-    public boolean windowsSouldClose() {
+    public boolean windowSouldClose() {
         return GLFW.glfwWindowShouldClose(window);
     }
 
@@ -138,21 +132,7 @@ public class WindowManager {
         return windowWidth;
     }
 
-    public Matrix4f getProjectionMatrix() {
-        return projectionMatrix;
-    }
-
     public long getWindow() {
         return window;
-    }
-
-    public Matrix4f updateProjectionMatrix() {
-        float aspectRatio = (float) windowWidth/windowHeight;
-        return projectionMatrix.setPerspective(FOV, aspectRatio, Z_NEAR, Z_FAR);
-    }
-
-    public Matrix4f updateProjectionMatrix(Matrix4f matrix, int windowWidth, int windowHeight) {
-        float aspectRatio = (float) windowWidth/windowHeight;
-        return projectionMatrix.setPerspective(FOV, aspectRatio, Z_NEAR, Z_FAR);
     }
 }
