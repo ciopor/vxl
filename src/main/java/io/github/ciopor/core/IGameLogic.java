@@ -2,6 +2,7 @@ package io.github.ciopor.core;
 
 import io.github.ciopor.core.graphics.Render;
 import io.github.ciopor.core.graphics.Window;
+import io.github.ciopor.core.scene.Scene;
 
 public interface IGameLogic {
 

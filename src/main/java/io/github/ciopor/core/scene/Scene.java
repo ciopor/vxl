@@ -1,4 +1,4 @@
-package io.github.ciopor.core;
+package io.github.ciopor.core.scene;
 
 import io.github.ciopor.core.graphics.Mesh;
 
@@ -6,10 +6,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Scene {
+    private Projection projection;
     private Map<String, Mesh> meshMap;
 
-    public Scene() {
+    public Scene(int width, int height) {
+        projection = new Projection(width, height);
         meshMap = new HashMap<>();
+    }
+
+    public Projection getProjection() {
+        return projection;
+    }
+
+    public void resize(int width, int height) {
+        projection.updateProjMatrix(width, height);
     }
 
     public void addMesh(String meshId, Mesh mesh) {

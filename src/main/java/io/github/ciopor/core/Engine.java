@@ -2,6 +2,7 @@ package io.github.ciopor.core;
 
 import io.github.ciopor.core.graphics.Render;
 import io.github.ciopor.core.graphics.Window;
+import io.github.ciopor.core.scene.Scene;
 
 public class Engine implements Runnable {
     public static final int TARGET_UPS = 30;
@@ -22,7 +23,7 @@ public class Engine implements Runnable {
         targetUps = opts.ups;
         this.gameLogic = gameLogic;
         render = new Render();
-        scene = new Scene();
+        scene = new Scene(window.getWidth(), window.getHeight());
         gameLogic.init(window, scene, render);
         running = true;
     }
@@ -35,7 +36,7 @@ public class Engine implements Runnable {
     }
 
     private void resize() {
-
+        scene.resize(window.getWidth(), window.getHeight());
     }
 
     public void run() {
