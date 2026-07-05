@@ -11,15 +11,16 @@ import org.lwjgl.system.MemoryUtil;
 import java.util.concurrent.Callable;
 
 public class Window {
-    private long windowHandle;
+    private final long windowHandle;
     private int width, height;
     private String title;
     private Callable<Void> resizeFunc;
 
+    // FIXME: użycie new WindowOptions() przy tworzeniu okna powoduje miganie aż do ziany rozmiaru okna
     public static class WindowOptions {
         public boolean compatibleProfile;
         public int fps;
-        private int width, height;
+        public int width, height;
         public int ups = Engine.TARGET_UPS;
     }
 

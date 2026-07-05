@@ -11,7 +11,11 @@ import io.github.ciopor.core.graphics.Window;
 public class Launcher implements IGameLogic {
         public static void main(String[] args) {
             Launcher launcher = new Launcher();
-            Engine game = new Engine(Consts.TITLE, new Window.WindowOptions(), launcher);
+            Window.WindowOptions windowOptions = new Window.WindowOptions();
+            windowOptions.compatibleProfile = false;
+            windowOptions.width = 1280;
+            windowOptions.height = 720;
+            Engine game = new Engine(Consts.TITLE, windowOptions, launcher);
             game.start();
         }
 
@@ -23,12 +27,22 @@ public class Launcher implements IGameLogic {
         @Override
         public void init(Window window, Scene scene, Render render) {
                 float[] positions = new float[]{
-                        0.0f, 0.5f, 0.0f,
+                        -0.5f, 0.5f, 0.0f,
                         -0.5f, -0.5f, 0.0f,
-                        0.5f, -0.5f, 0.0f
+                        0.5f, -0.5f, 0.0f,
+                        0.5f, 0.5f, 0.0f,
                 };
-                Mesh mesh = new Mesh(positions, 3);
-                scene.addMesh("triangle", mesh);
+                float[] colors = new float[]{
+                        0.5f, 0.0f, 0.0f,
+                        0.0f, 0.5f, 0.0f,
+                        0.0f, 0.0f, 0.5f,
+                        0.0f, 0.5f, 0.5f,
+                };
+                int[] indices = new int[]{
+                        0, 1, 3, 3, 1, 2,
+                };
+                Mesh mesh = new Mesh(positions, colors, indices);
+                scene.addMesh("quad", mesh);
         }
 
         @Override

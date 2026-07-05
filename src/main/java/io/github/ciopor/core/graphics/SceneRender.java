@@ -26,7 +26,7 @@ public class SceneRender {
 
         scene.getMeshMap().values().forEach(mesh -> {
                     GL46.glBindVertexArray(mesh.getVaoId());
-                    GL46.glDrawArrays(GL46.GL_TRIANGLES, 0, mesh.getNumVertices());
+                    GL46.glDrawElements(GL46.GL_TRIANGLES, mesh.getNumVertices(), GL46.GL_UNSIGNED_INT, 0);
                 }
         );
 
